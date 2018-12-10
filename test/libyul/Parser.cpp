@@ -310,7 +310,7 @@ BOOST_AUTO_TEST_CASE(builtins_parser)
 	{
 		BuiltinFunction const* query(YulString _name) const override
 		{
-			return _name == YulString{"builtin"} ? &f : nullptr;
+			return _name == "builtin"_yul ? &f : nullptr;
 		}
 		BuiltinFunction f;
 	};
@@ -327,9 +327,9 @@ BOOST_AUTO_TEST_CASE(builtins_analysis)
 	{
 		yul::BuiltinFunction const* query(YulString _name) const override
 		{
-			return _name == YulString("builtin") ? &m_builtin : nullptr;
+			return _name == "builtin"_yul ? &m_builtin : nullptr;
 		}
-		BuiltinFunction m_builtin{YulString{"builtin"}, vector<Type>(2), vector<Type>(3), false};
+		BuiltinFunction m_builtin{"builtin"_yul, vector<Type>(2), vector<Type>(3), false};
 	};
 
 	Dialect dialect(AsmFlavour::Strict, make_shared<SimpleBuiltinsAnalysis>());
